@@ -1,0 +1,75 @@
+---
+title: "Several ways to set figure size in R"
+author: "Fabio Fernandez"
+date: "November 20, 2017"
+output:  
+      html_document:  
+        keep_md: true
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# Let's use the known mtcars dataframe
+
+```{r}
+data(mtcars) 
+names(mtcars) 
+```
+
+## Option #1, YAML header
+
+You can set the size of figures globally in the YAML part, example.
+
+```{r, eval=FALSE}
+--- 
+title: "My Document" 
+output: html_document: 
+fig_width: 10 
+fig_height: 8 
+---
+```  
+
+## Option #2, Define figure size as global chunk option
+This will also affect all figures
+  
+```{r, eval=FALSE}
+{r setup}
+knitr::opts_chunk$set(fig.width=10, fig.height=8) 
+...
+```
+
+
+## Option #3, Define figure size in the Chunk options
+
+### Just change the height and width parameters
+```{r eval=FALSE}
+{r fig1, fig.height = 4, fig.width = 6}
+plot(pressure) 
+```
+
+```{r fig1, fig.height = 4, fig.width = 6, echo=FALSE}
+plot(pressure) 
+```
+
+### The alignment can be also specified
+```{r eval=FALSE}
+{r fig2, fig.height = 4, fig.width = 3, fig.align = "center"}
+plot(pressure) 
+```
+
+```{r fig2, fig.height = 4, fig.width = 3, fig.align = "center", echo=FALSE}
+plot(pressure) 
+```
+
+### The aspect ratio can be used
+```{r eval=FALSE}
+{r fig3,  fig.asp = .62}
+plot(pressure) 
+```
+
+```{r fig3,  fig.asp = .45, echo=FALSE}
+plot(pressure) 
+```
+
